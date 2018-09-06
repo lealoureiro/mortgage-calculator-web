@@ -1,30 +1,32 @@
 import React, { Component, createRef} from 'react'
 import axios from 'axios';
+
 import './payments.css';
 
 class MonthlyPaymentsForm extends Component {
-
   startPrincipal = createRef();
   marketValue = createRef();
-  term = createRef();
+  months = createRef();
   incomeTax = createRef();
 
   calculateMonthlyPayments = (e) => {
 
     const startPrincipal = this.startPrincipal.current.value;
     const marketValue = this.marketValue.current.value;
-    const term = this.term.current.value;
+    const months = this.months.current.value;
     const incomeTax = this.incomeTax.current.value;
 
+    const result = {
+      startPrincipal,
+      marketValue,
+      months,
+      incomeTax
+    }
 
     axios.post(
-      'http://mortgage-calculator-api.eu-west-2.elasticbeanstalk.com/monthly-payments',
-
+      'http://localhost:5000/monthly-payments',
+      JSON.stringify(result)
     )
-
-    const something = this.startPrincipal.current.value;
-
-    console.log(value);
 
     e.preventDefault();
   }
@@ -44,7 +46,7 @@ class MonthlyPaymentsForm extends Component {
           <label>EUR</label>
 
           <label>Term:</label>
-          <input ref={this.term} type="text"/>
+          <input ref={this.months} type="text"/>
           <label>Years</label>
 
           <label>Income Tax:</label>
