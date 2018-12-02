@@ -1,5 +1,6 @@
 import React, { Component, createRef} from 'react'
 import axios from 'axios';
+import InterestTiersForm from './InterestTiersForm'
 
 import './payments.css';
 
@@ -17,10 +18,10 @@ class MonthlyPaymentsForm extends Component {
 
   calculateMonthlyPayments = (e) => {
 
-    const initialPrincipal = parseInt(this.initialPrincipal.current.value);
-    const marketValue = parseInt(this.marketValue.current.value);
-    const months = parseInt(this.months.current.value);
-    const incomeTax = parseInt(this.incomeTax.current.value);
+    const initialPrincipal = parseInt(this.initialPrincipal.current.value, 10);
+    const marketValue = parseInt(this.marketValue.current.value, 10);
+    const months = parseInt(this.months.current.value, 10);
+    const incomeTax = parseInt(this.incomeTax.current.value, 10);
 
     const { onSubmit } = this.props;
 
@@ -72,6 +73,8 @@ class MonthlyPaymentsForm extends Component {
           <label>Income Tax:</label>
           <input ref={this.incomeTax} type="text" defaultValue="40"/>
           <label>%</label>
+
+          <InterestTiersForm />
 
           <button>Calculate</button>
 
