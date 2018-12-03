@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         <Banner/>
-        <MonthlyPaymentsForm onSubmit={this.showMonthlyPayments} />
+        <MonthlyPaymentsForm onComputedResult={this.showMonthlyPayments} />
         <MonthlyPaymentsTable monthlyPayments={this.state.monthlyPayments} />
       </div>
     );

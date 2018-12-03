@@ -23,7 +23,7 @@ class MonthlyPaymentsForm extends Component {
     const months = parseInt(this.months.current.value, 10);
     const incomeTax = parseInt(this.incomeTax.current.value, 10);
 
-    const { onSubmit } = this.props;
+    const { onComputedResult } = this.props;
 
     const inputData = {
       initialPrincipal,
@@ -43,7 +43,7 @@ class MonthlyPaymentsForm extends Component {
       inputData,
       {headers}
     ).then((result) => {
-      onSubmit(result.data);
+      onComputedResult(result.data);
     })
     .catch((error) => {
       console.log(error.response.errorMessage)
@@ -56,7 +56,7 @@ class MonthlyPaymentsForm extends Component {
     return (
       <div className={'input-form'}>
 
-        <form onSubmit={this.calculateMonthlyPayments}>
+        <form >
 
           <label>Start Principal:</label>
           <input ref={this.initialPrincipal} type="text" defaultValue="316800"/>
@@ -76,7 +76,7 @@ class MonthlyPaymentsForm extends Component {
 
           <InterestTiersForm />
 
-          <button>Calculate</button>
+          <button onClick={this.calculateMonthlyPayments}>Calculate</button>
 
         </form>
 
