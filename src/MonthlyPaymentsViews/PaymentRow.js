@@ -1,6 +1,6 @@
 import React from 'react';
-import PaymentCell from './PaymentCell';
 
+import PaymentCell from './PaymentCell';
 
 const suffixMapping = {
   month: '',
@@ -11,7 +11,7 @@ const suffixMapping = {
   principal: '€',
   totalGross: '€',
   totalNet: '€'
-}
+};
 
 const PaymentRow = ({ payment }) => <tr>{Object.entries(payment).map(
   ([ k, v ]) => <PaymentCell key={k} value={v} suffix={suffixMapping[k]} />

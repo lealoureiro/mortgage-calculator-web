@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+
 import PaymentRow from './PaymentRow';
-import PaymentsTableHeader from './PaymentsTableHeader'
+import PaymentsTableHeader from './PaymentsTableHeader';
 
 
 const mapColumnHeaderTitle = {
@@ -12,7 +13,7 @@ const mapColumnHeaderTitle = {
   principal: 'Principal',
   totalGross: 'Gross Payment',
   totalNet: 'Net Payment'
-}
+};
 
 class MonthlyPaymentsTable extends Component {
   render () {

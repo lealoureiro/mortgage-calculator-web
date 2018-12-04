@@ -1,43 +1,56 @@
-import React, { Component} from 'react'
-import InterestTierInput from './InterestTierInput'
+import React, { Component} from 'react';
+import InterestTierInput from './InterestTierInput';
 
 class InterestTiersForm extends Component {
-
   state = {
-    interestTiers: ['tier1']
+    interestTiers: ['tier1'],
+    inputValues: [],
   }
 
-  addNewInterestTier = (e) => {
-
-    var newState = this.state.interestTiers.slice();
-    newState.push('tier' + this.state.interestTiers.length);
-    this.state({interestTiers: newState});
+  addNewInterestTier = e => {
     e.preventDefault();
+    const { interestTiers } = this.state;
 
+    this.setState({
+      ...this.state,
+      interestTiers: [...interestTiers, `tier${interestTiers.length}`]
+    });
   }
 
+  deleteLastInterestTier = e => {
+    e.preventDefault();
+    const { interestTiers } = this.state;
+    const currentTiers = [...interestTiers];
+
+    if (interestTiers.length > 1) {
+      currentTiers.pop();
+
+      this.setState({ ...this.state, interestTiers: currentTiers });
+    }
+  }
+
+  handleChange = (interestInputValues) => {
+    const { onChange } = this.props;
+
+    onChange && onChange(interestInputValues);
+  }
 
   render() {
+    const { interestTiers } = this.state;
+
     return (
       <div className="interest tier form">
-
         <h2>Interest Tiers:</h2>
 
         <div id="interest-tier-list">
-
-          {
-            this.state.interestTiers.map((e) => {return <InterestTierInput />})
-          }
-
+          {interestTiers.map((tier, index) => <InterestTierInput id={index} onChange={this.handleChange} key={`tier-input-${index}`} />)}
         </div>
 
         <p><button onClick={this.addNewInterestTier}>Add New Interest Tier</button></p>
-
-
+        <p><button onClick={this.deleteLastInterestTier}>Delete last Interest Tier</button></p>
       </div>
     );
   }
+};
 
-}
-
-export default InterestTiersForm
+export default InterestTiersForm;
