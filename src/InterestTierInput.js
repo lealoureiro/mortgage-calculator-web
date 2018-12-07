@@ -19,11 +19,11 @@ class InterestTierInput extends Component {
       <div>
 
         <label>Interest:</label>
-        <input onChange={this.handleChange} ref={this.interest} type="text" defaultValue="2.04"/>
+        <input onChange={this.handleChange} ref={this.interest} type="text"/>
         <span>%</span>
 
         <label>Depth Percentage:</label>
-        <input onChange={this.handleChange} ref={this.percentage} type="text" defaultValue="95"/>
+        <input onChange={this.handleChange} ref={this.percentage} type="text"/>
         <span>%</span>
 
       </div>

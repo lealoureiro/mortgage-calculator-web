@@ -23,6 +23,14 @@ class MonthlyPaymentsForm extends Component {
   }
 
   calculateMonthlyPayments = (e) => {
+
+    e.preventDefault();
+
+    if(!this.validateInterestTiers()) {
+      console.log("Please fill the required fields!");
+      return;
+    }
+
     const initialPrincipal = parseInt(this.initialPrincipal.current.value, 10);
     const marketValue = parseInt(this.marketValue.current.value, 10);
     const months = parseInt(this.months.current.value, 10);
@@ -35,12 +43,7 @@ class MonthlyPaymentsForm extends Component {
       marketValue,
       months,
       incomeTax,
-      interestTiers: [
-        {
-          percentage: 102,
-          interest: 2.10
-        },
-      ]
+      interestTiers: this.processInterestTiers()
     };
 
     axios.post(URL_MONTHLY_PAYMENTS, inputData, {headers})
@@ -51,12 +54,11 @@ class MonthlyPaymentsForm extends Component {
       console.warn(error)
     });
 
-    e.preventDefault();
   }
 
   handleInterestChange = ({ id, currentValues }) => {
+    
     const { interestTiers } = this.state;
-
     const existingInput = Object.keys(interestTiers).includes(id);
 
     this.setState({
@@ -66,7 +68,23 @@ class MonthlyPaymentsForm extends Component {
       }
     });
 
-    // Faz console.log do this.state aqui para veres
+  }
+
+  validateInterestTiers = () => {
+
+    if (Object.keys(this.state.interestTiers).length === 0) {
+      console.log("At least on interest tier required!");
+      return false;
+    }
+
+    return true;
+
+  }
+
+  processInterestTiers = () => {
+      return Object.values(this.state.interestTiers).map(
+        e => ({interest: Number(e.interest), percentage: Number(e.percentage)})
+      );
   }
 
   render () {
