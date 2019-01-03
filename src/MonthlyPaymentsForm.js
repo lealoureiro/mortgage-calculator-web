@@ -13,6 +13,7 @@ const headers = {
 const URL_MONTHLY_PAYMENTS = 'http://localhost:5000/monthly-payments';
 
 class MonthlyPaymentsForm extends Component {
+
   initialPrincipal = createRef();
   marketValue = createRef();
   months = createRef();
@@ -57,7 +58,7 @@ class MonthlyPaymentsForm extends Component {
   }
 
   handleInterestChange = ({ id, currentValues }) => {
-    
+
     const { interestTiers } = this.state;
     const existingInput = Object.keys(interestTiers).includes(id);
 
@@ -93,12 +94,18 @@ class MonthlyPaymentsForm extends Component {
 
         <form >
 
-          <label>Start Principal:</label>
-          <input ref={this.initialPrincipal} type="text" defaultValue="316800"/>
-          <span>EUR</span>
+          <label htmlFor="initialPrincipalField">Start Principal:</label>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">EUR</span>
+            </div>
+            <input className="form-control" id="initialPrincipalField" ref={this.initialPrincipal} aria-describedby="initialPrincipalHelp" type="number" defaultValue="200000"/>
+          </div>
+          <small id="initialPrincipalHelp" className="form-text text-muted">The initial amount loan from the bank.</small>
+
 
           <label>Market Value:</label>
-          <input ref={this.marketValue} type="text" defaultValue="352000"/>
+          <input ref={this.marketValue} type="text" defaultValue="200000"/>
           <span>EUR</span>
 
           <label>Term:</label>

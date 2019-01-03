@@ -13,12 +13,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="container-fluid">
 
         <Banner/>
         <MonthlyPaymentsForm onComputedResult={this.showMonthlyPayments} />
         <MonthlyPaymentsTable monthlyPayments={this.state.monthlyPayments} />
-        
+
       </div>
     );
   }

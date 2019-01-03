@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 
 class InterestTierInput extends Component {
+
   interest = createRef();
   percentage = createRef();
 
@@ -19,11 +20,11 @@ class InterestTierInput extends Component {
       <div>
 
         <label>Interest:</label>
-        <input onChange={this.handleChange} ref={this.interest} type="text"/>
+        <input onChange={this.handleChange} ref={this.interest} />
         <span>%</span>
 
         <label>Depth Percentage:</label>
-        <input onChange={this.handleChange} ref={this.percentage} type="text"/>
+        <input onChange={this.handleChange} ref={this.percentage} />
         <span>%</span>
 
       </div>
