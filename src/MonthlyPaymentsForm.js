@@ -88,40 +88,69 @@ class MonthlyPaymentsForm extends Component {
       );
   }
 
+  preventInputSubmit = e => {
+
+    if (e.keyCode === 13 || e.which === 13) {
+      e.preventDefault();
+    }
+
+  }
+
   render () {
     return (
-      <div className="input-form">
 
-        <form >
+      <div className="container h-100">
 
-          <label htmlFor="initialPrincipalField">Start Principal:</label>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">EUR</span>
+        <form className="col-12">
+
+          <div className="form-group">
+            <label htmlFor="initialPrincipalField">Start Principal:</label>
+            <div className="input-group">
+              <input className="form-control" id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
+              <div className="input-group-append">
+                <span className="input-group-text">EUR</span>
+              </div>
             </div>
-            <input className="form-control" id="initialPrincipalField" ref={this.initialPrincipal} aria-describedby="initialPrincipalHelp" type="number" defaultValue="200000"/>
           </div>
-          <small id="initialPrincipalHelp" className="form-text text-muted">The initial amount loan from the bank.</small>
 
+          <div className="form-group">
+            <label htmlFor="marketValueField">Market Value:</label>
+            <div className="input-group">
+              <input className="form-control" id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
+              <div className="input-group-append">
+                <span className="input-group-text">EUR</span>
+              </div>
+            </div>
+          </div>
 
-          <label>Market Value:</label>
-          <input ref={this.marketValue} type="text" defaultValue="200000"/>
-          <span>EUR</span>
+          <div className="form-group">
+            <label htmlFor="termField">Term:</label>
+            <div className="input-group">
+              <input className="form-control" id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit}/>
+              <div className="input-group-append">
+                <span className="input-group-text">Months</span>
+              </div>
+            </div>
+          </div>
 
-          <label>Term:</label>
-          <input ref={this.months} type="text" defaultValue="360"/>
-          <span>Years</span>
-
-          <label>Income Tax:</label>
-          <input ref={this.incomeTax} type="text" defaultValue="40"/>
-          <span>%</span>
+          <div className="form-group">
+            <label htmlFor="incomeTaxField">Income Tax:</label>
+            <div className="input-group">
+              <input className="form-control" id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit}/>
+              <div className="input-group-append">
+                <span className="input-group-text">%</span>
+              </div>
+            </div>
+          </div>
 
           <InterestTiersForm onChange={this.handleInterestChange} />
 
-          <button onClick={this.calculateMonthlyPayments}>Calculate</button>
+          <button type="button" className="btn btn-success" onClick={this.calculateMonthlyPayments}>Calculate</button>
 
         </form>
+
       </div>
+
     );
   }
 }

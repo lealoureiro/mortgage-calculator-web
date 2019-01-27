@@ -8,7 +8,9 @@ class InterestTiersForm extends Component {
   }
 
   addNewInterestTier = e => {
+
     e.preventDefault();
+
     const { interestTiers } = this.state;
 
     this.setState({
@@ -39,15 +41,16 @@ class InterestTiersForm extends Component {
     const { interestTiers } = this.state;
 
     return (
-      <div className="interest tier form">
-        <h2>Interest Tiers:</h2>
+      <div className="interestTiersForm">
+        <h5>Interest Tiers:</h5>
 
         <div id="interest-tier-list">
           {interestTiers.map((tier, index) => <InterestTierInput id={index} onChange={this.handleChange} key={`tier-input-${index}`} />)}
         </div>
 
-        <p><button onClick={this.addNewInterestTier}>Add New Interest Tier</button></p>
-        <p><button onClick={this.deleteLastInterestTier}>Delete last Interest Tier</button></p>
+        <p><button type="button" className="btn btn-primary" onClick={this.addNewInterestTier}>Add</button></p>
+        <p><button type="button" className="btn btn-danger" onClick={this.deleteLastInterestTier}>Delete</button></p>
+        
       </div>
     );
   }

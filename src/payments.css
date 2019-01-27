@@ -1,6 +1,15 @@
-.input-form {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 340px;
+.container {
+  width: 250px;
+}
+
+.interestTiersForm {
+  width: 300px;
+}
+
+.interest-field {
+  width: 100px;
+}
+
+.interestTier {
+  width: 550px;
 }
