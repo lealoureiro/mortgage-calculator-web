@@ -2,13 +2,13 @@ import React, { Component, createRef } from 'react';
 
 class InterestTierInput extends Component {
   interest = createRef();
-  percentage = createRef();
+  debt = createRef();
 
   handleChange = e => {
     const { id, onChange } = this.props;
     const currentValues = {
       interest: this.interest.current.value,
-      percentage: this.percentage.current.value,
+      debt: this.debt.current.value,
     };
 
     onChange && onChange({ id, currentValues });
@@ -36,7 +36,7 @@ class InterestTierInput extends Component {
           </div>
 
           <div className="col-sm-6 input-group">
-            <input className="form-control" value={debt} id="debtPercentage" type="number" step="1" onChange={this.handleChange} ref={this.percentage} />
+            <input className="form-control" value={debt} id="debt" type="number" step="1" onChange={this.handleChange} ref={this.debt} />
             <div className="input-group-append">
               <span className="input-group-text">Debt Percentage (%)</span>
             </div>
