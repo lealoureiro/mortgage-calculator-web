@@ -3,29 +3,19 @@ import InterestTierInput from './InterestTierInput';
 
 class InterestTiersForm extends Component {
   state = {
-    interestTiers: ['tier0'],
     inputValues: [],
   }
 
-  addNewInterestTier = e => {
+  handleAddNewInterestTier = () => {
+    const { onAddTier } = this.props;
 
-    e.preventDefault();
-
-    const { interestTiers } = this.state;
-
-    this.setState({
-      ...this.state,
-      interestTiers: [...interestTiers, `tier${interestTiers.length}`]
-    });
+    onAddTier && onAddTier();
   }
 
   handleDeleteTier = id => {
-    const { interestTiers } = this.state;
-    const tierIndex = interestTiers.indexOf(`tier${id}`);
+    const { onDeleteTier } = this.props;
 
-    interestTiers.splice(tierIndex, 1);
-
-    this.setState({ ...this.state, interestTiers });
+    onDeleteTier && onDeleteTier(id)
   }
 
   handleChange = (interestInputValues) => {
@@ -35,7 +25,7 @@ class InterestTiersForm extends Component {
   }
 
   render() {
-    const { interestTiers } = this.state;
+    const { interestTiers } = this.props;
 
     return (
       <div className="interestTiersForm">
@@ -53,7 +43,7 @@ class InterestTiersForm extends Component {
           ))}
         </div>
 
-        <p><button type="button" className="btn btn-primary" onClick={this.addNewInterestTier}>Add</button></p>
+        <p><button type="button" className="btn btn-primary" onClick={this.handleAddNewInterestTier}>Add</button></p>
 
       </div>
     );
