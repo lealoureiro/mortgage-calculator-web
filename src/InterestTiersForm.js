@@ -36,6 +36,8 @@ class InterestTiersForm extends Component {
             (tier, index) => (
               <InterestTierInput
                 id={index}
+                interest={tier.interest}
+                debt={tier.debt}
                 onChange={this.handleChange}
                 onDelete={this.handleDeleteTier}
                 key={`tier-input-${index}`}
