@@ -3,7 +3,7 @@ import InterestTierInput from './InterestTierInput';
 
 class InterestTiersForm extends Component {
   state = {
-    interestTiers: ['tier1'],
+    interestTiers: ['tier0'],
     inputValues: [],
   }
 
@@ -19,16 +19,13 @@ class InterestTiersForm extends Component {
     });
   }
 
-  deleteLastInterestTier = e => {
-    e.preventDefault();
+  handleDeleteTier = id => {
     const { interestTiers } = this.state;
-    const currentTiers = [...interestTiers];
+    const tierIndex = interestTiers.indexOf(`tier${id}`);
 
-    if (interestTiers.length > 1) {
-      currentTiers.pop();
+    interestTiers.splice(tierIndex, 1);
 
-      this.setState({ ...this.state, interestTiers: currentTiers });
-    }
+    this.setState({ ...this.state, interestTiers });
   }
 
   handleChange = (interestInputValues) => {
@@ -45,12 +42,19 @@ class InterestTiersForm extends Component {
         <h5>Interest Tiers:</h5>
 
         <div id="interest-tier-list">
-          {interestTiers.map((tier, index) => <InterestTierInput id={index} onChange={this.handleChange} key={`tier-input-${index}`} />)}
+          {interestTiers.map(
+            (tier, index) => (
+              <InterestTierInput
+                id={index}
+                onChange={this.handleChange}
+                onDelete={this.handleDeleteTier}
+                key={`tier-input-${index}`}
+              />
+          ))}
         </div>
 
         <p><button type="button" className="btn btn-primary" onClick={this.addNewInterestTier}>Add</button></p>
-        <p><button type="button" className="btn btn-danger" onClick={this.deleteLastInterestTier}>Delete</button></p>
-        
+
       </div>
     );
   }
