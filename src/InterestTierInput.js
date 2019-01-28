@@ -15,6 +15,12 @@ class InterestTierInput extends Component {
     onChange && onChange({ id, currentValues });
   }
 
+  handleDelete = e => {
+    const { id, onDelete } = this.props;
+
+    onDelete && onDelete(id);
+  }
+
   render() {
     return (
 
@@ -35,7 +41,7 @@ class InterestTierInput extends Component {
             </div>
           </div>
 
-
+          <p><button type="button" className="btn btn-danger" onClick={this.handleDelete}>Delete</button></p>
         </div>
 
       </div>
