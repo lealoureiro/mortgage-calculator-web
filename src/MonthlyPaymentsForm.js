@@ -20,7 +20,25 @@ class MonthlyPaymentsForm extends Component {
   incomeTax = createRef();
 
   state = {
-    interestTiers: {}
+    interestTiers: [
+      { id: 0, interest: 2.50, debt: 101 }
+    ]
+  }
+
+  handleAddTier = () => {
+    const { interestTiers } = this.state;
+
+    this.setState({
+      interestTiers: [...interestTiers, { id: interestTiers.length, interest: 0, debt: 0 }]
+    });
+  }
+
+  handleDeleteTier = id => {
+    const { interestTiers } = this.state;
+
+    interestTiers.splice(id, 1);
+
+    this.setState({ interestTiers });
   }
 
   calculateMonthlyPayments = (e) => {
@@ -58,49 +76,46 @@ class MonthlyPaymentsForm extends Component {
   }
 
   handleInterestChange = ({ id, currentValues }) => {
-
     const { interestTiers } = this.state;
-    const existingInput = Object.keys(interestTiers).includes(id);
 
-    this.setState({
-      interestTiers: {
-        ...interestTiers,
-        [existingInput ? interestTiers.id : id]: {...currentValues}
-      }
-    });
+    interestTiers[id] = { ...interestTiers[id], ...currentValues };
 
+    this.setState({ interestTiers });
   }
 
   validateInterestTiers = () => {
+    const { interestTiers } = this.state;
 
-    if (Object.keys(this.state.interestTiers).length === 0) {
+    if (interestTiers.length === 0) {
       console.log("At least on interest tier required!");
+
       return false;
     }
 
     return true;
-
   }
 
   processInterestTiers = () => {
-      return Object.values(this.state.interestTiers).map(
-        e => ({interest: Number(e.interest), percentage: Number(e.percentage)})
-      );
+    return Object.values(this.state.interestTiers).map(
+      e => ({interest: Number(e.interest), percentage: Number(e.percentage)})
+    );
   }
 
   preventInputSubmit = e => {
-
     if (e.keyCode === 13 || e.which === 13) {
-      e.preventDefault();
+      return false;
     }
-
   }
 
   render () {
+    const { interestTiers } = this.state;
+
+    console.log('====================================');
+    console.log(interestTiers);
+    console.log('====================================');
+
     return (
-
       <div className="container h-100">
-
         <form className="col-12">
 
           <div className="form-group">
@@ -143,7 +158,12 @@ class MonthlyPaymentsForm extends Component {
             </div>
           </div>
 
-          <InterestTiersForm onChange={this.handleInterestChange} />
+          <InterestTiersForm
+            onChange={this.handleInterestChange}
+            onDeleteTier={this.handleDeleteTier}
+            onAddTier={this.handleAddTier}
+            interestTiers={interestTiers}
+          />
 
           <button type="button" className="btn btn-success" onClick={this.calculateMonthlyPayments}>Calculate</button>
 
