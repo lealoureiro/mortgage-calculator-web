@@ -25,13 +25,24 @@ class InterestTiersForm extends Component {
   }
 
   render() {
+
     const { interestTiers } = this.props;
+    const showDeleteButton = interestTiers.length > 1;
 
     return (
-      <div className="interestTiersForm">
-        <h5>Interest Tiers:</h5>
+      <div className="row">
 
-        <div id="interest-tier-list">
+        <div className="col">
+
+          <div className="row">
+            <div className="col-4">
+              <label>Interest:</label>
+            </div>
+            <div className="col-4">
+              <label>Debt Percentage:</label>
+            </div>
+          </div>
+
           {interestTiers.map(
             (tier, index) => (
               <InterestTierInput
@@ -41,11 +52,19 @@ class InterestTiersForm extends Component {
                 onChange={this.handleChange}
                 onDelete={this.handleDeleteTier}
                 key={`tier-input-${index}`}
+                showDeleteButton={showDeleteButton}
               />
-          ))}
-        </div>
+            ))}
 
-        <p><button type="button" className="btn btn-primary" onClick={this.handleAddNewInterestTier}>Add</button></p>
+            <div className="row">
+              <div className="col"></div>
+              <div className="col"></div>
+              <div className="col">
+                <p><button type="button" className="btn btn-primary" onClick={this.handleAddNewInterestTier}>Add</button></p>
+              </div>
+            </div>
+
+        </div>
 
       </div>
     );

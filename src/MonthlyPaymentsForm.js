@@ -34,10 +34,15 @@ class MonthlyPaymentsForm extends Component {
   }
 
   handleDeleteTier = id => {
+
     const { interestTiers } = this.state;
 
-    interestTiers.splice(id, 1);
+    if (interestTiers.length === 1) {
+      console.log("Cannot delete last interest tier!");
+      return;
+    }
 
+    interestTiers.splice(id, 1);
     this.setState({ interestTiers });
   }
 
@@ -76,19 +81,19 @@ class MonthlyPaymentsForm extends Component {
   }
 
   handleInterestChange = ({ id, currentValues }) => {
+
     const { interestTiers } = this.state;
-
     interestTiers[id] = { ...interestTiers[id], ...currentValues };
-
     this.setState({ interestTiers });
+
   }
 
   validateInterestTiers = () => {
+
     const { interestTiers } = this.state;
 
     if (interestTiers.length === 0) {
       console.log("At least on interest tier required!");
-
       return false;
     }
 
@@ -96,8 +101,8 @@ class MonthlyPaymentsForm extends Component {
   }
 
   processInterestTiers = () => {
-    return Object.values(this.state.interestTiers).map(
-      e => ({interest: Number(e.interest), percentage: Number(e.percentage)})
+    return this.state.interestTiers.map(
+      e => ({interest: Number(e.interest), percentage: Number(e.debt)})
     );
   }
 
@@ -108,55 +113,63 @@ class MonthlyPaymentsForm extends Component {
   }
 
   render () {
+
     const { interestTiers } = this.state;
 
-    console.log('====================================');
-    console.log(interestTiers);
-    console.log('====================================');
-
     return (
-      <div className="container h-100">
-        <form className="col-12">
 
-          <div className="form-group">
-            <label htmlFor="initialPrincipalField">Start Principal:</label>
-            <div className="input-group">
-              <input className="form-control" id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
-              <div className="input-group-append">
-                <span className="input-group-text">EUR</span>
+      <div className="monthly-payments-form">
+
+        <form>
+
+          <div className="row">
+
+            <div className="col-6">
+
+              <div className="form-group">
+                <label htmlFor="initialPrincipalField">Start Principal:</label>
+                <div className="input-group">
+                  <input className="form-control" id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
+                  <div className="input-group-append">
+                    <span className="input-group-text">EUR</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="marketValueField">Market Value:</label>
+                <div className="input-group">
+                  <input className="form-control" id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
+                  <div className="input-group-append">
+                    <span className="input-group-text">EUR</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="termField">Term:</label>
+                <div className="input-group">
+                  <input className="form-control" id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit}/>
+                  <div className="input-group-append">
+                    <span className="input-group-text">Months</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="incomeTaxField">Income Tax:</label>
+                <div className="input-group">
+                  <input className="form-control" id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit}/>
+                  <div className="input-group-append">
+                    <span className="input-group-text">%</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="marketValueField">Market Value:</label>
-            <div className="input-group">
-              <input className="form-control" id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
-              <div className="input-group-append">
-                <span className="input-group-text">EUR</span>
-              </div>
-            </div>
-          </div>
+          <div className="col"></div>
 
-          <div className="form-group">
-            <label htmlFor="termField">Term:</label>
-            <div className="input-group">
-              <input className="form-control" id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit}/>
-              <div className="input-group-append">
-                <span className="input-group-text">Months</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="incomeTaxField">Income Tax:</label>
-            <div className="input-group">
-              <input className="form-control" id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit}/>
-              <div className="input-group-append">
-                <span className="input-group-text">%</span>
-              </div>
-            </div>
-          </div>
+        </div>
 
           <InterestTiersForm
             onChange={this.handleInterestChange}
@@ -165,10 +178,13 @@ class MonthlyPaymentsForm extends Component {
             interestTiers={interestTiers}
           />
 
-          <button type="button" className="btn btn-success" onClick={this.calculateMonthlyPayments}>Calculate</button>
+          <div className="row">
+            <div className="col">
+              <button type="button" className="btn btn-success" onClick={this.calculateMonthlyPayments}>Calculate</button>
+            </div>
+          </div>
 
         </form>
-
       </div>
 
     );
