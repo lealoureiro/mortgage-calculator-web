@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 
 import { calculate } from '../api';
 
-import InterestTiersForm from './InterestTiersForm';
+import { Form, FieldSet, Span } from './styles';
 
 class MonthlyPaymentsForm extends Component {
   initialPrincipal = createRef();
@@ -14,26 +14,6 @@ class MonthlyPaymentsForm extends Component {
     interestTiers: [
       { id: 0, interest: 2.50, debt: 101 }
     ]
-  }
-
-  handleAddTier = () => {
-    const { interestTiers } = this.state;
-
-    this.setState({
-      interestTiers: [...interestTiers, { id: interestTiers.length, interest: 0, debt: 0 }]
-    });
-  }
-
-  handleDeleteTier = id => {
-    const { interestTiers } = this.state;
-
-    if (interestTiers.length === 1) {
-      console.log("Cannot delete last interest tier!");
-      return;
-    }
-
-    interestTiers.splice(id, 1);
-    this.setState({ interestTiers });
   }
 
   calculateMonthlyPayments = async (e) => {
@@ -59,17 +39,7 @@ class MonthlyPaymentsForm extends Component {
       interestTiers: this.processInterestTiers()
     };
 
-    const result = await calculate(inputData, onComputedResult);
-
-    console.log('====================================');
-    console.log(result);
-    console.log('====================================');
-  }
-
-  handleInterestChange = ({ id, currentValues }) => {
-    const { interestTiers } = this.state;
-    interestTiers[id] = { ...interestTiers[id], ...currentValues };
-    this.setState({ interestTiers });
+    await calculate(inputData, onComputedResult);
   }
 
   validateInterestTiers = () => {
@@ -96,65 +66,34 @@ class MonthlyPaymentsForm extends Component {
   }
 
   render () {
-    const { interestTiers } = this.state;
-
     return (
-      <form>
-          <div className="row">
+      <Form>
+        <FieldSet>
+          <label htmlFor="initialPrincipalField">Start Principal:</label>
+          <input id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
+          <Span>EUR</Span>
+        </FieldSet>
 
-            <div className="col-6">
+        <FieldSet>
+          <label htmlFor="marketValueField">Market Value:</label>
+          <input id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
+          <Span>EUR</Span>
+        </FieldSet>
 
-              <div className="form-group">
-                <label htmlFor="initialPrincipalField">Start Principal:</label>
-                <div className="input-group">
-                  <input className="form-control" id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
-                  <div className="input-group-append">
-                    <span className="input-group-text">EUR</span>
-                  </div>
-                </div>
-              </div>
+        <FieldSet>
+          <label htmlFor="termField">Term:</label>
+          <input id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit}/>
+          <Span>Months</Span>
+        </FieldSet>
 
-              <div className="form-group">
-                <label htmlFor="marketValueField">Market Value:</label>
-                <div className="input-group">
-                  <input className="form-control" id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
-                  <div className="input-group-append">
-                    <span className="input-group-text">EUR</span>
-                  </div>
-                </div>
-              </div>
+        <FieldSet>
+          <label htmlFor="incomeTaxField">Income Tax:</label>
+          <input id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit}/>
+          <Span>%</Span>
+        </FieldSet>
 
-              <div className="form-group">
-                <label htmlFor="termField">Term:</label>
-                <div className="input-group">
-                  <input className="form-control" id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit}/>
-                  <div className="input-group-append">
-                    <span className="input-group-text">Months</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="incomeTaxField">Income Tax:</label>
-                <div className="input-group">
-                  <input className="form-control" id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit}/>
-                  <div className="input-group-append">
-                    <span className="input-group-text">%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-
-          <InterestTiersForm
-            onChange={this.handleInterestChange}
-            onDeleteTier={this.handleDeleteTier}
-            onAddTier={this.handleAddTier}
-            interestTiers={interestTiers}
-          />
-
-          <button type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
-        </form>
+        <button type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
+      </Form>
     );
   }
 }

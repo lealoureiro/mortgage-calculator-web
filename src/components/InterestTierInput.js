@@ -1,4 +1,6 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, Fragment } from 'react';
+
+import { FieldSet } from './styles';
 
 class InterestTierInput extends Component {
   interest = createRef();
@@ -21,38 +23,24 @@ class InterestTierInput extends Component {
   }
 
   render() {
-
     const { interest, debt, showDeleteButton } = this.props;
 
     return (
+      <Fragment>
+        <FieldSet>
+            <label htmlFor="interestField">Interest:</label>
+            <input value={interest} size="5" id="interestField" type="number" step="0.1" onChange={this.handleChange} ref={this.interest} />
+            <span>%</span>
+        </FieldSet>
 
-      <div className="row">
+        <FieldSet>
+          <label htmlFor="debt">Debt Percentage:</label>
+          <input value={debt} id="debt" type="number" step="1" onChange={this.handleChange} ref={this.debt} />
+          <span>%</span>
+        </FieldSet>
 
-        <div className="form-group col-4">
-          <div className="input-group mx-0">
-            <input className="form-control" value={interest} size="5" id="interestField" type="number" step="0.1" onChange={this.handleChange} ref={this.interest} />
-            <div className="input-group-append">
-              <span className="input-group-text">%</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-group col-4">
-          <div className="input-group">
-            <input className="form-control" value={debt} id="debt" type="number" step="1" onChange={this.handleChange} ref={this.debt} />
-            <div className="input-group-append">
-              <span className="input-group-text">%</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-group col-1">
-          <div className="input-group">
-            { showDeleteButton && (<p><button type="button" className="btn btn-danger" onClick={this.handleDelete}>X</button></p>) }
-          </div>
-        </div>
-
-      </div>
+        { showDeleteButton && <button type="button" onClick={this.handleDelete}>X</button> }
+      </Fragment>
     );
   }
 

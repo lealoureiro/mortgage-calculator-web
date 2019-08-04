@@ -24,6 +24,10 @@ export default createGlobalStyle`
     padding: 0;
   }
 
+  hr {
+    margin: 30px 0;
+  }
+
   ul {
     list-style-type: none;
   }
@@ -49,12 +53,20 @@ export default createGlobalStyle`
 
   input {
     border: 1px solid transparent;
+    font-size: 14px;
     outline: none;
+    padding: 8px;
     transition: all .3s ease-in-out;
 
     &:focus {
       border: 1px solid #333;
     }
+  }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
   }
 
   input::-webkit-outer-spin-button,
