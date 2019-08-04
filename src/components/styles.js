@@ -21,3 +21,13 @@ export const Span = styled.span`
   font-size: 12px;
   padding: 10px;
 `;
+
+export const Table = styled.table`
+  padding: 10px;
+  flex-shrink: 0;
+  flex-grow: 1;
+
+  td {
+    text-align: center;
+  }
+`;

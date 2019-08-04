@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PaymentRow from './MonthlyPaymentsViews/PaymentRow';
 import PaymentsTableHeader from './MonthlyPaymentsViews/PaymentsTableHeader';
 
+import { Table } from './styles';
 
 const mapColumnHeaderTitle = {
   month: 'Month',
@@ -20,8 +21,7 @@ class MonthlyPaymentsTable extends Component {
     const { monthlyPayments: { payments } } = this.props;
 
     return (
-      <table>
-
+      <Table>
         <thead>
           <tr>{ payments && payments.length ? Object.keys(payments[0]).map((key, index) => <PaymentsTableHeader key={index} title={mapColumnHeaderTitle[key]} />) : null }</tr>
         </thead>
@@ -29,8 +29,7 @@ class MonthlyPaymentsTable extends Component {
         <tbody>
           { payments && payments.length ? payments.map(payment=> <PaymentRow key={payment.month} payment={payment} />) : null }
         </tbody>
-
-      </table>
+      </Table>
     )
   }
 }

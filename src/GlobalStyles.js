@@ -11,6 +11,10 @@ export default createGlobalStyle`
   }
 
   body,
+  table,
+  tr,
+  td,
+  th,
   html,
   p,
   label,

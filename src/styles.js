@@ -4,7 +4,7 @@ export const MainWrapper = styled.main`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 1024px;
+  max-width: 1168px;
   padding: 30px;
 `;
 
@@ -18,5 +18,6 @@ export const InnerWrapper = styled.div`
 `;
 
 export const FormGroup = styled.div`
-  
+  flex-shrink: 0;
+  flex-grow: 0;
 `;
