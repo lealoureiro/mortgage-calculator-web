@@ -10,7 +10,7 @@ const headers = {
   'Accept': 'application/json'
 };
 
-const URL_MONTHLY_PAYMENTS = 'http://localhost:5000/monthly-payments';
+const URL_MONTHLY_PAYMENTS = 'https://secret-journey-21988.herokuapp.com/monthly-payments';
 
 class MonthlyPaymentsForm extends Component {
 
