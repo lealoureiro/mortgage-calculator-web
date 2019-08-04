@@ -25,15 +25,12 @@ class InterestTiersForm extends Component {
   }
 
   render() {
-
     const { interestTiers } = this.props;
     const showDeleteButton = interestTiers.length > 1;
 
     return (
       <div className="row">
-
         <div className="col">
-
           <div className="row">
             <div className="col-4">
               <label>Interest:</label>

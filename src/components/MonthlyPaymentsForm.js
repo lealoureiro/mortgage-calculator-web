@@ -1,19 +1,10 @@
-import React, { Component, createRef} from 'react';
-import axios from 'axios';
+import React, { Component, createRef } from 'react';
+
+import { calculate } from '../api';
 
 import InterestTiersForm from './InterestTiersForm';
 
-import './payments.css';
-
-const headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-};
-
-const URL_MONTHLY_PAYMENTS = 'http://localhost:5000/monthly-payments';
-
 class MonthlyPaymentsForm extends Component {
-
   initialPrincipal = createRef();
   marketValue = createRef();
   months = createRef();
@@ -34,7 +25,6 @@ class MonthlyPaymentsForm extends Component {
   }
 
   handleDeleteTier = id => {
-
     const { interestTiers } = this.state;
 
     if (interestTiers.length === 1) {
@@ -46,8 +36,7 @@ class MonthlyPaymentsForm extends Component {
     this.setState({ interestTiers });
   }
 
-  calculateMonthlyPayments = (e) => {
-
+  calculateMonthlyPayments = async (e) => {
     e.preventDefault();
 
     if(!this.validateInterestTiers()) {
@@ -70,30 +59,24 @@ class MonthlyPaymentsForm extends Component {
       interestTiers: this.processInterestTiers()
     };
 
-    axios.post(URL_MONTHLY_PAYMENTS, inputData, {headers})
-    .then((result) => {
-      onComputedResult(result.data);
-    })
-    .catch((error) => {
-      console.warn(error)
-    });
+    const result = await calculate(inputData, onComputedResult);
 
+    console.log('====================================');
+    console.log(result);
+    console.log('====================================');
   }
 
   handleInterestChange = ({ id, currentValues }) => {
-
     const { interestTiers } = this.state;
     interestTiers[id] = { ...interestTiers[id], ...currentValues };
     this.setState({ interestTiers });
-
   }
 
   validateInterestTiers = () => {
-
     const { interestTiers } = this.state;
 
     if (interestTiers.length === 0) {
-      console.log("At least on interest tier required!");
+      console.log("At least one interest tier required!");
       return false;
     }
 
@@ -113,15 +96,10 @@ class MonthlyPaymentsForm extends Component {
   }
 
   render () {
-
     const { interestTiers } = this.state;
 
     return (
-
-      <div className="monthly-payments-form">
-
-        <form>
-
+      <form>
           <div className="row">
 
             <div className="col-6">
@@ -166,9 +144,6 @@ class MonthlyPaymentsForm extends Component {
                 </div>
               </div>
             </div>
-
-          <div className="col"></div>
-
         </div>
 
           <InterestTiersForm
@@ -178,15 +153,8 @@ class MonthlyPaymentsForm extends Component {
             interestTiers={interestTiers}
           />
 
-          <div className="row">
-            <div className="col">
-              <button type="button" className="btn btn-success" onClick={this.calculateMonthlyPayments}>Calculate</button>
-            </div>
-          </div>
-
+          <button type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
         </form>
-      </div>
-
     );
   }
 }

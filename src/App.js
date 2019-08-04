@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-import Banner from './Banner'
-import MonthlyPaymentsForm from './MonthlyPaymentsForm'
-import MonthlyPaymentsTable from './MonthlyPaymentsViews/MonthlyPaymentsTable'
+import MonthlyPaymentsForm from './components/MonthlyPaymentsForm'
+import MonthlyPaymentsTable from './components/MonthlyPaymentsTable'
 
-import './App.css';
+import { MainWrapper, H1 } from './styles';
+import GlobalStyles from './GlobalStyles';
 
-class App extends Component {
-  state = { monthlyPayments: [] };
+const App = () => {
+  const [monthlyPayments, setMonthlyPayments] = useState([]);
 
-  showMonthlyPayments = monthlyPayments => this.setState({ monthlyPayments });
+  return (
+    <MainWrapper>
+      <GlobalStyles />
+      
+      <H1>Calculate your Linear Mortgage Monthly Payments</H1>
 
-  render() {
-    return (
-      <div className="container-fluid">
+      <MonthlyPaymentsForm onComputedResult={setMonthlyPayments} />
+      <MonthlyPaymentsTable monthlyPayments={monthlyPayments} />
 
-        <Banner/>
-        <MonthlyPaymentsForm onComputedResult={this.showMonthlyPayments} />
-        <MonthlyPaymentsTable monthlyPayments={this.state.monthlyPayments} />
-
-      </div>
-    );
-  }
+    </MainWrapper>
+  );
 }
 
 export default App;

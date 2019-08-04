@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import PaymentRow from './PaymentRow';
-import PaymentsTableHeader from './PaymentsTableHeader';
+import PaymentRow from './MonthlyPaymentsViews/PaymentRow';
+import PaymentsTableHeader from './MonthlyPaymentsViews/PaymentsTableHeader';
 
 
 const mapColumnHeaderTitle = {
