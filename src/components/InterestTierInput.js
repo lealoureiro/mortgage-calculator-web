@@ -1,6 +1,6 @@
-import React, { Component, createRef, Fragment } from 'react';
+import React, { Component, createRef } from 'react';
 
-import { FieldSet } from './styles';
+import { StyledInterestTierInput, FieldSet, Span } from './styles';
 
 class InterestTierInput extends Component {
   interest = createRef();
@@ -26,21 +26,21 @@ class InterestTierInput extends Component {
     const { interest, debt, showDeleteButton } = this.props;
 
     return (
-      <Fragment>
+      <StyledInterestTierInput>
         <FieldSet>
             <label htmlFor="interestField">Interest:</label>
             <input value={interest} size="5" id="interestField" type="number" step="0.1" onChange={this.handleChange} ref={this.interest} />
-            <span>%</span>
+            <Span>%</Span>
         </FieldSet>
 
         <FieldSet>
           <label htmlFor="debt">Debt Percentage:</label>
           <input value={debt} id="debt" type="number" step="1" onChange={this.handleChange} ref={this.debt} />
-          <span>%</span>
+          <Span>%</Span>
         </FieldSet>
 
-        { showDeleteButton && <button type="button" onClick={this.handleDelete}>X</button> }
-      </Fragment>
+        { showDeleteButton && <button className="delete" type="button" onClick={this.handleDelete}>Delete Tier</button> }
+      </StyledInterestTierInput>
     );
   }
 

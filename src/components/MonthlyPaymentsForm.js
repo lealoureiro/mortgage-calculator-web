@@ -1,5 +1,7 @@
 import React, { Component, createRef } from 'react';
 
+import InterestTiersForm from "./InterestTiersForm";
+
 import { calculate } from '../api';
 
 import { Form, FieldSet, Span } from './styles';
@@ -29,7 +31,7 @@ class MonthlyPaymentsForm extends Component {
     const months = parseInt(this.months.current.value, 10);
     const incomeTax = parseInt(this.incomeTax.current.value, 10);
 
-    const { onComputedResult } = this.props;
+    const { onComputedResult, onCalculate } = this.props;
 
     const inputData = {
       initialPrincipal,
@@ -39,7 +41,11 @@ class MonthlyPaymentsForm extends Component {
       interestTiers: this.processInterestTiers()
     };
 
+    onCalculate();
+
     await calculate(inputData, onComputedResult);
+
+    onCalculate();
   }
 
   validateInterestTiers = () => {
@@ -55,7 +61,7 @@ class MonthlyPaymentsForm extends Component {
 
   processInterestTiers = () => {
     return this.state.interestTiers.map(
-      e => ({interest: Number(e.interest), percentage: Number(e.debt)})
+      e => ({ interest: Number(e.interest), percentage: Number(e.debt) })
     );
   }
 
@@ -92,7 +98,9 @@ class MonthlyPaymentsForm extends Component {
           <Span>%</Span>
         </FieldSet>
 
-        <button type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
+        <InterestTiersForm />
+
+        <button style={{ marginTop: "30px" }} type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
       </Form>
     );
   }

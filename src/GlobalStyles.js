@@ -46,12 +46,26 @@ export default createGlobalStyle`
     border: 1px solid #333;
     outline: none;
     padding: 5px 12px;
+    font-size: 14px;
     transition: all .3s ease-in-out;
 
     &:hover {
       background-color: #333;
       color: #fff;
       cursor: pointer;
+    }
+
+    &.delete {
+      width: 165px;
+      border: 1px solid #b20000;
+      color: #fff;
+      background-color: #b20000;
+    }
+
+    &.delete:hover {
+      border: 1px solid #b20000;
+      color: #b20000;
+      background-color: #fff;
     }
   }
 

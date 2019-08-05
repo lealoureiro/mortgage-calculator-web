@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import InterestTierInput from './InterestTierInput';
 
-import { Form } from './styles';
-
 class InterestTiersForm extends Component {
   state = {
     interestTiers: [
@@ -42,7 +40,7 @@ class InterestTiersForm extends Component {
     const showDeleteButton = interestTiers.length > 1;
 
     return (
-      <Form>
+      <div style={{ marginTop: '20px' }}>
         {interestTiers.map(
         (tier, index) => (
           <InterestTierInput
@@ -56,8 +54,8 @@ class InterestTiersForm extends Component {
           />
         ))}
 
-        <button type="button" onClick={this.handleAddTier}>+</button>
-      </Form>
+        <button style={{ width: "165px" }} type="button" onClick={this.handleAddTier}>Add tier</button>
+      </div>
     );
   }
 };

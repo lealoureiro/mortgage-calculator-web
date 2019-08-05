@@ -10,6 +10,11 @@ export const MainWrapper = styled.main`
 
 export const H1 = styled.h1`
   font-size: 24px;
+  margin-bottom: 10px;
+`;
+
+export const H3 = styled.h3`
+  font-size: 18px;
   margin-bottom: 30px;
 `;
 
@@ -20,4 +25,12 @@ export const InnerWrapper = styled.div`
 export const FormGroup = styled.div`
   flex-shrink: 0;
   flex-grow: 0;
+`;
+
+export const PreResults = styled.div`
+  align-items: center;
+  display: flex;
+  height: 640px;
+  justify-content: center;
+  width: 100%;
 `;
