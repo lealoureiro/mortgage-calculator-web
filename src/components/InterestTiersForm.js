@@ -49,14 +49,14 @@ class InterestTiersForm extends Component {
             id={index}
             interest={tier.interest}
             debt={tier.debt}
-            onChange={this.handleChange}
+            onChange={this.handleInterestChange}
             onDelete={this.handleDeleteTier}
             key={`tier-input-${index}`}
             showDeleteButton={showDeleteButton}
           />
         ))}
 
-        <button type="button" onClick={this.handleAddNewInterestTier}>+</button>
+        <button type="button" onClick={this.handleAddTier}>+</button>
       </Form>
     );
   }
