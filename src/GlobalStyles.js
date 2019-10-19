@@ -59,6 +59,7 @@ export default createGlobalStyle`
       width: 165px;
       border: 1px solid #b20000;
       color: #fff;
+      height: 36px;
       background-color: #b20000;
     }
 

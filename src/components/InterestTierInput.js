@@ -6,7 +6,7 @@ class InterestTierInput extends Component {
   interest = createRef();
   debt = createRef();
 
-  handleChange = e => {
+  handleChange = () => {
     const { id, onChange } = this.props;
     const currentValues = {
       interest: this.interest.current.value,
@@ -16,7 +16,7 @@ class InterestTierInput extends Component {
     onChange && onChange({ id, currentValues });
   }
 
-  handleDelete = e => {
+  handleDelete = () => {
     const { id, onDelete } = this.props;
 
     onDelete && onDelete(id);

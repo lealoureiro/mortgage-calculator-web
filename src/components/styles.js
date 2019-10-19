@@ -23,13 +23,21 @@ export const FieldSet = styled.fieldset`
 `;
 
 export const StyledInterestTierInput = styled.div`
+  align-items: flex-end;
+  display: flex;
   padding: 10px 0;
 
-  + div {
-    margin-top: 20px;
-    border-top: 1px solid #333;
+  fieldset {
+    margin-top: 0;
+  }
+
+  fieldset + fieldset {
+    margin-left: 10px;
   }
 `;
+
+// margin-top: 20px;
+//     border-top: 1px solid #333;
 
 export const Span = styled.span`
   font-size: 10px;
