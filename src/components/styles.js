@@ -33,6 +33,16 @@ export const StyledInterestTierInput = styled.div`
 
   fieldset + fieldset {
     margin-left: 10px;
+
+    @media (max-width: 640px) {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    flex-direction: column;
   }
 `;
 
