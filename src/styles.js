@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MainWrapper = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin-left: 50px;
   max-width: 1168px;
   padding: 30px;
 `;

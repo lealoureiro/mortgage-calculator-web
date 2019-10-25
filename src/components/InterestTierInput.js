@@ -29,17 +29,17 @@ class InterestTierInput extends Component {
       <StyledInterestTierInput>
         <FieldSet>
             <label htmlFor="interestField">Interest:</label>
-            <input value={interest} size="5" id="interestField" type="number" step="0.1" onChange={this.handleChange} ref={this.interest} />
+            <input className="interest" value={interest} size="5" id="interestField" type="number" step="0.1" onChange={this.handleChange} ref={this.interest} />
             <Span>%</Span>
         </FieldSet>
 
         <FieldSet>
           <label htmlFor="debt">Debt Percentage:</label>
-          <input value={debt} id="debt" type="number" step="1" onChange={this.handleChange} ref={this.debt} />
+          <input className="debtPercentage" value={debt} id="debt" type="number" step="1" onChange={this.handleChange} ref={this.debt} />
           <Span>%</Span>
         </FieldSet>
 
-        { showDeleteButton && <button className="delete" type="button" onClick={this.handleDelete}>Delete Tier</button> }
+        { showDeleteButton && <button className="delete" type="button" onClick={this.handleDelete}>X</button> }
       </StyledInterestTierInput>
     );
   }

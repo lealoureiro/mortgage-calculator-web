@@ -9,6 +9,10 @@ export const Form = styled.form`
     margin-top: 14px;
     width: 100%;
   }
+
+  .delete {
+    width: 34px;
+  }
 `;
 
 export const FieldSet = styled.fieldset`
@@ -43,6 +47,14 @@ export const StyledInterestTierInput = styled.div`
   @media (max-width: 640px) {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .debtPercentage {
+    width: 126px;
+  }
+
+  .interest {
+    width: 60px;
   }
 `;
 
