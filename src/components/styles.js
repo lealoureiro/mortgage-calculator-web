@@ -13,6 +13,13 @@ export const Form = styled.form`
   .delete {
     width: 34px;
   }
+
+  .calculate {
+    padding: 10px 0;
+    marginTop: 30px;
+    width: 246px;
+  }
+
 `;
 
 export const FieldSet = styled.fieldset`

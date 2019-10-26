@@ -100,7 +100,7 @@ class MonthlyPaymentsForm extends Component {
 
         <InterestTiersForm />
 
-        <button style={{ padding: "10px 0", marginTop: "30px", width: "246px" }} type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
+        <button className="calculate" type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
       </Form>
     );
   }
