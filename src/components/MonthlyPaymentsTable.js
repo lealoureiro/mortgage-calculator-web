@@ -37,9 +37,7 @@ class MonthlyPaymentsTable extends Component {
           </thead>
 
           <tbody>
-              {payments.map(payment => (
-                  <PaymentRow key={payment.month} payment={payment} />
-                ))}
+              {payments.map(payment => (<PaymentRow index={payment.month} key={payment.month} payment={payment} />))}
           </tbody>
         </Table>
       </TableWrapper>

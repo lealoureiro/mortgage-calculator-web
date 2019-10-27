@@ -1,5 +1,5 @@
 import React from 'react';
 
-const PaymentCell = ({ value, suffix}) => <td>{value} {suffix}</td>;
+const PaymentCell = ({ cellType, value, suffix}) => <td className={cellType}>{value} {suffix}</td>;
 
 export default PaymentCell;

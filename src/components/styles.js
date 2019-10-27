@@ -65,9 +65,6 @@ export const StyledInterestTierInput = styled.div`
   }
 `;
 
-// margin-top: 20px;
-//     border-top: 1px solid #333;
-
 export const Span = styled.span`
   font-size: 10px;
   padding: 10px;
@@ -82,6 +79,8 @@ export const TableWrapper = styled.div`
 `;
 
 export const Table = styled.table`
+  border-collapse: collapse;
+
   tr {
     padding: 5px 0;
   }
@@ -89,6 +88,10 @@ export const Table = styled.table`
   td {
     text-align: center;
     padding: 5px 0;
+  }
+
+  td.monthlyPaymentsCellBlue {
+    background-color: #a7e1fc;
   }
 
   th {

@@ -13,8 +13,14 @@ const suffixMapping = {
   totalNet: '€'
 };
 
-const PaymentRow = ({ payment }) => <tr>{Object.entries(payment).map(
-  ([ k, v ]) => <PaymentCell key={k} value={v} suffix={suffixMapping[k]} />
+const PaymentRow = ({ index, payment }) => <tr>{Object.entries(payment).map(
+  ([ k, v ]) => {
+
+    const cellType = index % 2 === 0 ? "monthlyPaymentsCellBlue" : "monthlyPaymentsCell";
+    
+    return <PaymentCell key={k} cellType={cellType} value={v} suffix={suffixMapping[k]} />
+
+  }
 )}</tr>;
 
 
