@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 
 import InterestTiersForm from "./InterestTiersForm";
+import PartialRepaymentsForm from "./PartialRepaymentsForm";
 
 import { calculate } from '../api';
 
@@ -99,6 +100,7 @@ class MonthlyPaymentsForm extends Component {
         </FieldSet>
 
         <InterestTiersForm />
+        <PartialRepaymentsForm />
 
         <button className="calculate" type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
       </Form>

@@ -54,7 +54,7 @@ class InterestTiersForm extends Component {
           />
         ))}
 
-        <button style={{ width: "165px" }} type="button" onClick={this.handleAddTier}>Add tier</button>
+        <button style={{ width: "230px" }} type="button" onClick={this.handleAddTier}>Add Interest Tier</button>
       </div>
     );
   }
