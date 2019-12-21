@@ -57,7 +57,7 @@ export const StyledInterestTierInput = styled.div`
   }
 
   .debtPercentage {
-    width: 126px;
+    width: 98px;
   }
 
   .interest {

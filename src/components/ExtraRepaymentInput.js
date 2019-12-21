@@ -42,7 +42,7 @@ class ExtraRepaymentInput extends Component {
             <FieldSet>
               <label htmlFor="amountFiled">Amount:</label>
               <input className="amount" value={amount} id="amount" type="number" step="1" onChange={this.handleChange} ref={this.amount} />
-              <Span>EUR</Span>
+              <Span>€</Span>
             </FieldSet>
     
             {<button className="delete" type="button" onClick={this.handleDelete}>X</button> }

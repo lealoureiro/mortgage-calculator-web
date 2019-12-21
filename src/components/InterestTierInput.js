@@ -41,8 +41,9 @@ class InterestTierInput extends Component {
           <Span>%</Span>
         </FieldSet>
 
-        { showDeleteButton && <button className="delete" type="button" onClick={this.handleDelete}>X</button> }
-        
+        <div style={{width:'35px'}}>
+          { showDeleteButton && <button className="delete" type="button" onClick={this.handleDelete}>X</button> }
+        </div>
       </StyledInterestTierInput>
     );
   }
