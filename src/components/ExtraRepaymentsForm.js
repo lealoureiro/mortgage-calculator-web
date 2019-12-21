@@ -5,49 +5,52 @@ import ExtraRepaymentsInput from './ExtraRepaymentInput';
 class ExtraRepaymentsForm extends Component {
 
     state = {
-        extraPayments: []
+        extraRepayments: []
     }
 
     handleExtraRepaymentsChange = ({ id, currentValues }) => {
-        const { extraPayments } = this.state;
-        extraPayments[id] = { ...extraPayments[id], ...currentValues };
-        this.setState({ extraPayments });
+        const { extraRepayments } = this.state;
+        extraRepayments[id] = { ...extraRepayments[id], ...currentValues };
+        this.setState({ extraRepayments });
 
-        console.log(this.state.extraPayments);
+        const {onChange} = this.props;
+        
+        onChange && onChange({extraRepayments});
+
     }
 
     handleAddExtraRepayment = () => {
 
-        const { extraPayments } = this.state;
+        const { extraRepayments } = this.state;
     
         this.setState({
-          extraPayments: [...extraPayments, { id: extraPayments.length, month: 0, amount: 0 }]
+            extraRepayments: [...extraRepayments, { id: extraRepayments.length, month: 0, amount: 0 }]
         });
 
     }
 
     handleDeleteExtraRepayment = id => {
 
-        const { extraPayments } = this.state;
+        const { extraRepayments } = this.state;
     
-        if (extraPayments.length === 0) {
+        if (extraRepayments.length === 0) {
           console.log("There are no extra repayments to delete!");
           return;
         }
     
-        extraPayments.splice(id, 1);
-        this.setState({ extraPayments });
+        extraRepayments.splice(id, 1);
+        this.setState({ extraRepayments });
 
       }
 
     render () {
 
-        const { extraPayments } = this.state;
+        const { extraRepayments } = this.state;
 
         return (
             <div >
 
-                {extraPayments.map(
+                {extraRepayments.map(
                     (payment, index) => (
                         <ExtraRepaymentsInput
                             id={index}

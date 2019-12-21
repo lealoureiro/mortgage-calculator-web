@@ -85,6 +85,14 @@ class MonthlyPaymentsForm extends Component {
     }
   }
 
+  handleInterestTierChange = ({interestTiers}) => {
+    this.setState({interestTiers});
+  }
+
+  handleExtraRepaymentsChange = ({extraRepayments}) => {
+    this.setState({extraRepayments});
+  }
+
   render () {
     return (
       <Form>
@@ -112,8 +120,8 @@ class MonthlyPaymentsForm extends Component {
           <Span>%</Span>
         </FieldSet>
 
-        <InterestTiersForm />
-        <ExtraRepaymentsForm />
+        <InterestTiersForm onChange={this.handleInterestTierChange} />
+        <ExtraRepaymentsForm onChange={this.handleExtraRepaymentsChange} />
 
         <button className="calculate" type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
 

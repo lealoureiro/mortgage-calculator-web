@@ -14,7 +14,8 @@ class InterestTiersForm extends Component {
     interestTiers[id] = { ...interestTiers[id], ...currentValues };
     this.setState({ interestTiers });
 
-    console.log(this.state.interestTiers)
+    const {onChange} = this.props;
+    onChange && onChange({interestTiers});
   }
 
   handleAddTier = () => {
@@ -29,7 +30,6 @@ class InterestTiersForm extends Component {
     const { interestTiers } = this.state;
 
     if (interestTiers.length === 1) {
-      console.log("Cannot delete last interest tier!");
       return;
     }
 
