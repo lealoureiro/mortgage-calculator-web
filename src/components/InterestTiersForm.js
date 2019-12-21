@@ -36,10 +36,12 @@ class InterestTiersForm extends Component {
   }
 
   render() {
+
     const { interestTiers } = this.state;
     const showDeleteButton = interestTiers.length > 1;
 
     return (
+      
       <div style={{ marginTop: '20px' }}>
         {interestTiers.map(
         (tier, index) => (
@@ -54,7 +56,8 @@ class InterestTiersForm extends Component {
           />
         ))}
 
-        <button style={{ width: "165px" }} type="button" onClick={this.handleAddTier}>Add tier</button>
+        <button style={{ width: "200px" }} type="button" onClick={this.handleAddTier}>Add tier</button>
+
       </div>
     );
   }

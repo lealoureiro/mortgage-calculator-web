@@ -40,6 +40,7 @@ class InterestTierInput extends Component {
         </FieldSet>
 
         { showDeleteButton && <button className="delete" type="button" onClick={this.handleDelete}>X</button> }
+        
       </StyledInterestTierInput>
     );
   }

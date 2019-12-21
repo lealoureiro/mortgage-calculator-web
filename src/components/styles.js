@@ -65,6 +65,38 @@ export const StyledInterestTierInput = styled.div`
   }
 `;
 
+export const StyledExtraRepaymentInput = styled.div`
+  align-items: flex-end;
+  display: flex;
+  padding: 10px 0;
+
+  fieldset {
+    margin-top: 0;
+  }
+
+  fieldset + fieldset {
+    margin-left: 10px;
+
+    @media (max-width: 640px) {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .month {
+    width: 60px;
+  }
+
+  .amount {
+    width: 126px;
+  }
+`;
+
 export const Span = styled.span`
   font-size: 10px;
   padding: 10px;
