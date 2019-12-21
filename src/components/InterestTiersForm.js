@@ -13,6 +13,8 @@ class InterestTiersForm extends Component {
     const { interestTiers } = this.state;
     interestTiers[id] = { ...interestTiers[id], ...currentValues };
     this.setState({ interestTiers });
+
+    console.log(this.state.interestTiers)
   }
 
   handleAddTier = () => {

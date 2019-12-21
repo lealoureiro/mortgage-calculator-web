@@ -12,6 +12,8 @@ class ExtraRepaymentsForm extends Component {
         const { extraPayments } = this.state;
         extraPayments[id] = { ...extraPayments[id], ...currentValues };
         this.setState({ extraPayments });
+
+        console.log(this.state.extraPayments);
     }
 
     handleAddExtraRepayment = () => {
@@ -53,10 +55,12 @@ class ExtraRepaymentsForm extends Component {
                             amount={payment.amount}
                             onChange={this.handleExtraRepaymentsChange}
                             onDelete={this.handleDeleteExtraRepayment}
-                            key={`tier-input-${index}`}
+                            key={`repayment-input-${index}`}
                         />
-        ))}
+                ))}
+
                 <button style={{ width: "200px" }} type="button" onClick={this.handleAddExtraRepayment}>Add Extra Repayment</button>
+
             </div>
         );
 

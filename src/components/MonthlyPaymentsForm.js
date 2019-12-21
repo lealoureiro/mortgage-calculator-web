@@ -9,6 +9,7 @@ import { calculate } from '../api';
 import { Form, FieldSet, Span } from './styles';
 
 class MonthlyPaymentsForm extends Component {
+
   initialPrincipal = createRef();
   marketValue = createRef();
   months = createRef();
@@ -17,10 +18,12 @@ class MonthlyPaymentsForm extends Component {
   state = {
     interestTiers: [
       { id: 0, interest: 2.50, debt: 101 }
-    ]
+    ],
+    extraRepayments: []
   }
 
   calculateMonthlyPayments = async (e) => {
+
     e.preventDefault();
 
     if(!this.validateInterestTiers()) {
@@ -40,7 +43,8 @@ class MonthlyPaymentsForm extends Component {
       marketValue,
       months,
       incomeTax,
-      interestTiers: this.processInterestTiers()
+      interestTiers: this.processInterestTiers(),
+      repayments: this.processExtraRepayments()
     };
 
     onCalculate();
@@ -48,9 +52,11 @@ class MonthlyPaymentsForm extends Component {
     await calculate(inputData, onComputedResult);
 
     onCalculate();
+
   }
 
   validateInterestTiers = () => {
+    
     const { interestTiers } = this.state;
 
     if (interestTiers.length === 0) {
@@ -64,6 +70,12 @@ class MonthlyPaymentsForm extends Component {
   processInterestTiers = () => {
     return this.state.interestTiers.map(
       e => ({ interest: Number(e.interest), percentage: Number(e.debt) })
+    );
+  }
+
+  processExtraRepayments = () => {
+    return this.state.extraRepayments.map(
+      e => ({ month: Number(e.month), amount: Number(e.amount) })
     );
   }
 
@@ -104,6 +116,7 @@ class MonthlyPaymentsForm extends Component {
         <ExtraRepaymentsForm />
 
         <button className="calculate" type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
+
       </Form>
     );
   }

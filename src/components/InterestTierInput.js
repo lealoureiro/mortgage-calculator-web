@@ -3,10 +3,12 @@ import React, { Component, createRef } from 'react';
 import { StyledInterestTierInput, FieldSet, Span } from './styles';
 
 class InterestTierInput extends Component {
+
   interest = createRef();
   debt = createRef();
 
   handleChange = () => {
+
     const { id, onChange } = this.props;
     const currentValues = {
       interest: this.interest.current.value,

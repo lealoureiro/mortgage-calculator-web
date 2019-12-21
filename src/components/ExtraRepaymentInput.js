@@ -16,9 +16,7 @@ class ExtraRepaymentInput extends Component {
         };
     
         onChange && onChange({ id, currentValues });
-
-        const { month, amount } = this.props;
-
+        
     }
 
     handleDelete = () => {
