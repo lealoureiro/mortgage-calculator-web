@@ -10,124 +10,124 @@ import { Form, FieldSet, Span } from './styles';
 
 class MonthlyPaymentsForm extends Component {
 
-  initialPrincipal = createRef();
-  marketValue = createRef();
-  months = createRef();
-  incomeTax = createRef();
+    initialPrincipal = createRef();
+    marketValue = createRef();
+    months = createRef();
+    incomeTax = createRef();
 
-  state = {
-    interestTiers: [
-      { id: 0, interest: 2.50, debt: 101 }
-    ],
-    extraRepayments: []
-  }
-
-  calculateMonthlyPayments = async (e) => {
-
-    e.preventDefault();
-
-    if(!this.validateInterestTiers()) {
-      console.log("Please fill the required fields!");
-      return;
+    state = {
+        interestTiers: [
+            { id: 0, interest: 2.50, debt: 101 }
+        ],
+        extraRepayments: []
     }
 
-    const initialPrincipal = parseInt(this.initialPrincipal.current.value, 10);
-    const marketValue = parseInt(this.marketValue.current.value, 10);
-    const months = parseInt(this.months.current.value, 10);
-    const incomeTax = parseInt(this.incomeTax.current.value, 10);
+    calculateMonthlyPayments = async (e) => {
 
-    const { onComputedResult, onCalculate } = this.props;
+        e.preventDefault();
 
-    const inputData = {
-      initialPrincipal,
-      marketValue,
-      months,
-      incomeTax,
-      interestTiers: this.processInterestTiers(),
-      repayments: this.processExtraRepayments()
-    };
+        if (!this.validateInterestTiers()) {
+            console.log("Please fill the required fields!");
+            return;
+        }
 
-    onCalculate();
+        const initialPrincipal = parseInt(this.initialPrincipal.current.value, 10);
+        const marketValue = parseInt(this.marketValue.current.value, 10);
+        const months = parseInt(this.months.current.value, 10);
+        const incomeTax = parseInt(this.incomeTax.current.value, 10);
 
-    await calculate(inputData, onComputedResult);
+        const { onComputedResult, onCalculate } = this.props;
 
-    onCalculate();
+        const inputData = {
+            initialPrincipal,
+            marketValue,
+            months,
+            incomeTax,
+            interestTiers: this.processInterestTiers(),
+            repayments: this.processExtraRepayments()
+        };
 
-  }
+        onCalculate();
 
-  validateInterestTiers = () => {
-    
-    const { interestTiers } = this.state;
+        await calculate(inputData, onComputedResult);
 
-    if (interestTiers.length === 0) {
-      console.log("At least one interest tier required!");
-      return false;
+        onCalculate();
+
     }
 
-    return true;
-  }
+    validateInterestTiers = () => {
 
-  processInterestTiers = () => {
-    return this.state.interestTiers.map(
-      e => ({ interest: Number(e.interest), percentage: Number(e.debt) })
-    );
-  }
+        const { interestTiers } = this.state;
 
-  processExtraRepayments = () => {
-    return this.state.extraRepayments.map(
-      e => ({ month: Number(e.month), amount: Number(e.amount) })
-    );
-  }
+        if (interestTiers.length === 0) {
+            console.log("At least one interest tier required!");
+            return false;
+        }
 
-  preventInputSubmit = e => {
-    if (e.keyCode === 13 || e.which === 13) {
-      return false;
+        return true;
     }
-  }
 
-  handleInterestTierChange = ({interestTiers}) => {
-    this.setState({interestTiers});
-  }
+    processInterestTiers = () => {
+        return this.state.interestTiers.map(
+            e => ({ interest: Number(e.interest), percentage: Number(e.debt) })
+        );
+    }
 
-  handleExtraRepaymentsChange = ({extraRepayments}) => {
-    this.setState({extraRepayments});
-  }
+    processExtraRepayments = () => {
+        return this.state.extraRepayments.map(
+            e => ({ month: Number(e.month), amount: Number(e.amount) })
+        );
+    }
 
-  render () {
-    return (
-      <Form>
-        <FieldSet>
-          <label htmlFor="initialPrincipalField">Start Principal:</label>
-          <input id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
-          <Span>EUR</Span>
-        </FieldSet>
+    preventInputSubmit = e => {
+        if (e.keyCode === 13 || e.which === 13) {
+            return false;
+        }
+    }
 
-        <FieldSet>
-          <label htmlFor="marketValueField">Market Value:</label>
-          <input id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit}/>
-          <Span>EUR</Span>
-        </FieldSet>
+    handleInterestTierChange = ({ interestTiers }) => {
+        this.setState({ interestTiers });
+    }
 
-        <FieldSet>
-          <label htmlFor="termField">Term:</label>
-          <input id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit}/>
-          <Span>Months</Span>
-        </FieldSet>
+    handleExtraRepaymentsChange = ({ extraRepayments }) => {
+        this.setState({ extraRepayments });
+    }
 
-        <FieldSet>
-          <label htmlFor="incomeTaxField">Income Tax:</label>
-          <input id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit}/>
-          <Span>%</Span>
-        </FieldSet>
+    render() {
+        return (
+            <Form>
+                <FieldSet>
+                    <label htmlFor="initialPrincipalField">Start Principal:</label>
+                    <input id="initialPrincipalField" ref={this.initialPrincipal} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit} />
+                    <Span>EUR</Span>
+                </FieldSet>
 
-        <InterestTiersForm onChange={this.handleInterestTierChange} />
-        <ExtraRepaymentsForm onChange={this.handleExtraRepaymentsChange} />
+                <FieldSet>
+                    <label htmlFor="marketValueField">Market Value:</label>
+                    <input id="marketValueField" ref={this.marketValue} type="number" step="500" defaultValue="200000" onKeyPress={this.preventInputSubmit} />
+                    <Span>EUR</Span>
+                </FieldSet>
 
-        <button className="calculate" type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
+                <FieldSet>
+                    <label htmlFor="termField">Term:</label>
+                    <input id="termField" ref={this.months} type="number" step="12" defaultValue="360" onKeyPress={this.preventInputSubmit} />
+                    <Span>Months</Span>
+                </FieldSet>
 
-      </Form>
-    );
-  }
+                <FieldSet>
+                    <label htmlFor="incomeTaxField">Income Tax:</label>
+                    <input id="incomeTaxField" ref={this.incomeTax} type="number" step="1" defaultValue="40" onKeyPress={this.preventInputSubmit} />
+                    <Span>%</Span>
+                </FieldSet>
+
+                <InterestTiersForm onChange={this.handleInterestTierChange} />
+                <ExtraRepaymentsForm onChange={this.handleExtraRepaymentsChange} />
+
+                <button className="calculate" type="button" onClick={this.calculateMonthlyPayments}>Calculate</button>
+
+            </Form>
+        );
+    }
 }
 
 export default MonthlyPaymentsForm;

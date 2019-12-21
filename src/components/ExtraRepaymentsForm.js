@@ -9,41 +9,46 @@ class ExtraRepaymentsForm extends Component {
     }
 
     handleExtraRepaymentsChange = ({ id, currentValues }) => {
+
         const { extraRepayments } = this.state;
         extraRepayments[id] = { ...extraRepayments[id], ...currentValues };
+
         this.setState({ extraRepayments });
 
-        const {onChange} = this.props;
-        
-        onChange && onChange({extraRepayments});
+        const { onChange } = this.props;
+        onChange && onChange({ extraRepayments });
 
     }
 
     handleAddExtraRepayment = () => {
 
         const { extraRepayments } = this.state;
-    
-        this.setState({
-            extraRepayments: [...extraRepayments, { id: extraRepayments.length, month: 0, amount: 0 }]
-        });
+        const updatedExtraRepayments = [...extraRepayments, { id: extraRepayments.length, month: 0, amount: 0 }];
+
+        this.setState({ extraRepayments: updatedExtraRepayments });
+        this.updateMainState({ extraRepayments: updatedExtraRepayments });
 
     }
 
     handleDeleteExtraRepayment = id => {
 
         const { extraRepayments } = this.state;
-    
+
         if (extraRepayments.length === 0) {
-          console.log("There are no extra repayments to delete!");
-          return;
+            return;
         }
-    
+
         extraRepayments.splice(id, 1);
         this.setState({ extraRepayments });
 
-      }
+    }
 
-    render () {
+    updateMainState = ({ extraRepayments }) => {
+        const { onChange } = this.props;
+        onChange && onChange({ extraRepayments });
+    }
+
+    render() {
 
         const { extraRepayments } = this.state;
 
@@ -60,7 +65,7 @@ class ExtraRepaymentsForm extends Component {
                             onDelete={this.handleDeleteExtraRepayment}
                             key={`repayment-input-${index}`}
                         />
-                ))}
+                    ))}
 
                 <button style={{ width: "200px" }} type="button" onClick={this.handleAddExtraRepayment}>Add Extra Repayment</button>
 
@@ -69,6 +74,6 @@ class ExtraRepaymentsForm extends Component {
 
     }
 
-} 
+}
 
 export default ExtraRepaymentsForm;

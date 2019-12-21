@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import InterestTierInput from './InterestTierInput';
 
 class InterestTiersForm extends Component {
+
   state = {
     interestTiers: [
       { id: 0, interest: 2.50, debt: 101 }
@@ -10,20 +11,23 @@ class InterestTiersForm extends Component {
   }
 
   handleInterestChange = ({ id, currentValues }) => {
+
     const { interestTiers } = this.state;
     interestTiers[id] = { ...interestTiers[id], ...currentValues };
     this.setState({ interestTiers });
 
-    const {onChange} = this.props;
-    onChange && onChange({interestTiers});
+    this.updateMainState();
+
   }
 
   handleAddTier = () => {
+    
     const { interestTiers } = this.state;
+    const updatedInterstTiers = [...interestTiers, { id: interestTiers.length, interest: 0, debt: 0 }];
 
-    this.setState({
-      interestTiers: [...interestTiers, { id: interestTiers.length, interest: 0, debt: 0 }]
-    });
+    this.setState({interestTiers: updatedInterstTiers });
+    this.updateMainState({interestTiers: updatedInterstTiers});
+
   }
 
   handleDeleteTier = id => {
@@ -35,7 +39,13 @@ class InterestTiersForm extends Component {
 
     interestTiers.splice(id, 1);
     this.setState({ interestTiers });
+
   }
+
+  updateMainState = ({interestTiers}) => {
+    const {onChange} = this.props;
+    onChange && onChange({interestTiers});
+  } 
 
   render() {
 

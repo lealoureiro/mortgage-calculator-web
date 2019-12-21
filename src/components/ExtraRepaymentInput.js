@@ -11,12 +11,12 @@ class ExtraRepaymentInput extends Component {
 
         const { id, onChange } = this.props;
         const currentValues = {
-          month: this.month.current.value,
-          amount: this.amount.current.value,
+            month: this.month.current.value,
+            amount: this.amount.current.value,
         };
-    
+
         onChange && onChange({ id, currentValues });
-        
+
     }
 
     handleDelete = () => {
@@ -29,28 +29,28 @@ class ExtraRepaymentInput extends Component {
     render() {
 
         const { month, amount } = this.props;
-    
+
         return (
 
-          <StyledExtraRepaymentInput>
+            <StyledExtraRepaymentInput>
 
-            <FieldSet>
-                <label htmlFor="monthField">Month:</label>
-                <input className="month" value={month} size="4" id="monthField" type="number" step="1" onChange={this.handleChange} ref={this.month} />
-            </FieldSet>
-    
-            <FieldSet>
-              <label htmlFor="amountFiled">Amount:</label>
-              <input className="amount" value={amount} id="amount" type="number" step="1" onChange={this.handleChange} ref={this.amount} />
-              <Span>€</Span>
-            </FieldSet>
-    
-            {<button className="delete" type="button" onClick={this.handleDelete}>X</button> }
+                <FieldSet>
+                    <label htmlFor="monthField">Month:</label>
+                    <input className="month" value={month} size="4" id="monthField" type="number" step="1" onChange={this.handleChange} ref={this.month} />
+                </FieldSet>
 
-          </StyledExtraRepaymentInput>
+                <FieldSet>
+                    <label htmlFor="amountFiled">Amount:</label>
+                    <input className="amount" value={amount} id="amount" type="number" step="1" onChange={this.handleChange} ref={this.amount} />
+                    <Span>€</Span>
+                </FieldSet>
+
+                {<button className="delete" type="button" onClick={this.handleDelete}>X</button>}
+
+            </StyledExtraRepaymentInput>
 
         );
-      }
+    }
 
 }
 
