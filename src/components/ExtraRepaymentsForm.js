@@ -13,10 +13,8 @@ class ExtraRepaymentsForm extends Component {
         const { extraRepayments } = this.state;
         extraRepayments[id] = { ...extraRepayments[id], ...currentValues };
 
-        this.setState({ extraRepayments });
-
-        const { onChange } = this.props;
-        onChange && onChange({ extraRepayments });
+        this.setState({extraRepayments});
+        this.updateMainState({extraRepayments});
 
     }
 
