@@ -41,7 +41,7 @@ class InterestTiersForm extends Component {
     const showDeleteButton = interestTiers.length > 1;
 
     return (
-      
+
       <div style={{ marginTop: '20px' }}>
         {interestTiers.map(
         (tier, index) => (
