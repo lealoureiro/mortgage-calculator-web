@@ -22,7 +22,11 @@ class MonthlyPaymentsForm extends Component {
         extraRepayments: []
     }
 
-    calculateMonthlyPayments = async (e) => {
+    sleep = (milliseconds) => {
+        return new Promise((resolve) => setTimeout(resolve, milliseconds));
+    };
+
+    calculateMonthlyPayments = (e) => {
 
         e.preventDefault();
 
@@ -36,7 +40,7 @@ class MonthlyPaymentsForm extends Component {
         const months = parseInt(this.months.current.value, 10);
         const incomeTax = parseInt(this.incomeTax.current.value, 10);
 
-        const { onComputedResult, onCalculate } = this.props;
+        const { onComputedResult, handleLoadingState, onErrorMessage, onApiCall } = this.props;
 
         const inputData = {
             initialPrincipal,
@@ -47,13 +51,12 @@ class MonthlyPaymentsForm extends Component {
             repayments: this.processExtraRepayments()
         };
 
-        onCalculate();
+        onApiCall();
 
-        await calculate(inputData, onComputedResult);
-
-        onCalculate();
+        calculate(inputData, onComputedResult, onErrorMessage, handleLoadingState);
 
     }
+
 
     validateInterestTiers = () => {
 
