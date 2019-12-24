@@ -22,10 +22,6 @@ class MonthlyPaymentsForm extends Component {
         extraRepayments: []
     }
 
-    sleep = (milliseconds) => {
-        return new Promise((resolve) => setTimeout(resolve, milliseconds));
-    };
-
     calculateMonthlyPayments = (e) => {
 
         e.preventDefault();
@@ -56,7 +52,6 @@ class MonthlyPaymentsForm extends Component {
         calculate(inputData, onComputedResult, onErrorMessage, handleLoadingState);
 
     }
-
 
     validateInterestTiers = () => {
 
