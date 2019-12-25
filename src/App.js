@@ -73,7 +73,7 @@ class App extends Component {
                 <GlobalStyles />
 
                 <H1>Calculate your Linear Mortgage Monthly Payments</H1>
-                <H3>Please fill in the form on the left and press then press Calculate</H3>
+                <H3>Please fill in the form on the left and then press Calculate</H3>
 
                 <InnerWrapper>
                     <FormGroup>
