@@ -36,7 +36,7 @@ class MonthlyPaymentsForm extends Component {
         const months = parseInt(this.months.current.value, 10);
         const incomeTax = parseInt(this.incomeTax.current.value, 10);
 
-        const { onComputedResult, handleLoadingState, onErrorMessage, onApiCall } = this.props;
+        const { onComputedResult, onLoadingFinish, onErrorMessage, onApiCall } = this.props;
 
         const inputData = {
             initialPrincipal,
@@ -49,7 +49,7 @@ class MonthlyPaymentsForm extends Component {
 
         onApiCall();
 
-        calculate(inputData, onComputedResult, onErrorMessage, handleLoadingState);
+        calculate(inputData, onComputedResult, onErrorMessage, onLoadingFinish);
 
     }
 

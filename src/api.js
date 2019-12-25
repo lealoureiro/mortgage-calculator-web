@@ -8,14 +8,14 @@ const headers = {
 //const URL_MONTHLY_PAYMENTS = 'http://localhost:5000/monthly-payments';
 const URL_MONTHLY_PAYMENTS = 'https://secret-journey-21988.herokuapp.com/monthly-payments';
 
-export const calculate = (inputData, callback, onErrorCallback, handleLoadingState) => {
+export const calculate = (inputData, callback, onErrorCallback, onLoadingFinish) => {
     axios.post(URL_MONTHLY_PAYMENTS, inputData, { headers })
         .then((result) => {
             callback({ monthlyPayments: result.data });
-            handleLoadingState({ showLoading: false });
+            onLoadingFinish();
         })
         .catch((error) => {
             onErrorCallback({ errorMessage: error.response.data.errorMessage })
-            handleLoadingState({ showLoading: false });
+            onLoadingFinish();
         });
 }

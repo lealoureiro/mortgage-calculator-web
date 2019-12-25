@@ -45,8 +45,8 @@ class App extends Component {
         this.setState({ monthlyPayments });
     }
 
-    handleLoadingState = ({ showLoading }) => {
-        this.setState({ showLoading });
+    onLoadingFinish = () => {
+        this.setState({ showLoading: false });
     }
 
     setErrorMessage = ({ errorMessage }) => {
@@ -79,7 +79,7 @@ class App extends Component {
                     <FormGroup>
                         <MonthlyPaymentsForm
                             onComputedResult={this.setMonthlyPayments}
-                            handleLoadingState={this.handleLoadingState}
+                            onLoadingFinish={this.onLoadingFinish}
                             onErrorMessage={this.setErrorMessage}
                             onApiCall={this.onApiCall}
                         />
