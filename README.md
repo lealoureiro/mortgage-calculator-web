@@ -8,6 +8,8 @@ Current functionality:
 
 Available on: https://lealoureiro.github.io/mortgage-calculator-web
 
+API Implementation: https://github.com/lealoureiro/mortgage-calculator-api
+
 
 ## Pre-requisites
 - npm

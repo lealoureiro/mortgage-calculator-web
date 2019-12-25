@@ -76,6 +76,7 @@ class App extends Component {
                 <H3>Please fill in the form on the left and then press Calculate</H3>
 
                 <InnerWrapper>
+                    
                     <FormGroup>
                         <MonthlyPaymentsForm
                             onComputedResult={this.setMonthlyPayments}
@@ -88,6 +89,7 @@ class App extends Component {
                     {this.showResult()}
 
                 </InnerWrapper>
+
             </MainWrapper >
         );
     }
