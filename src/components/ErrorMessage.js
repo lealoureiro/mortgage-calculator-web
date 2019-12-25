@@ -8,8 +8,8 @@ class ErrorMessage extends Component {
         const { message } = this.props;
 
         return (
-            <div style={{ textAlign: 'center', width: '500px', marginTop: '100px' }}>
-                <h2 style={{ color: 'red' }}>{message}</h2>
+            <div style={{ textAlign: 'center', width: '600px', marginTop: '100px' }}>
+                <h3 style={{ color: 'red' }}>{message}</h3>
             </div>
         );
 

@@ -15,7 +15,7 @@ export const calculate = (inputData, callback, onErrorCallback, handleLoadingSta
             handleLoadingState({ showLoading: false });
         })
         .catch((error) => {
-            onErrorCallback({ errorMessage: "API respond with an error!" })
+            onErrorCallback({ errorMessage: error.response.data.errorMessage })
             handleLoadingState({ showLoading: false });
         });
 }

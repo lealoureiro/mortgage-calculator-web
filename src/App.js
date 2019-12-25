@@ -55,8 +55,6 @@ class App extends Component {
 
     showResult() {
 
-        console.log(this.state);
-
         if (this.state.showLoading) {
             return (<PreResults><Loader type="MutatingDots" color="#333" height="100" width={100} /></PreResults>);
         } else {
